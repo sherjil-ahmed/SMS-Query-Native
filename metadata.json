@@ -1,0 +1,6 @@
+{
+  "name": "SMS Query",
+  "description": "Minimalist native SMS app with advanced multi-attribute querying by sender, keywords, date duration, and custom time of day windows.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
