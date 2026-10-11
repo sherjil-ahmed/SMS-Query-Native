@@ -204,27 +204,37 @@ fun DualSimDetailsDialog(
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                // Info note
+                // Info note & Default SMS Status
+                val isDefaultApp = com.example.util.DefaultSmsAppUtil.isDefaultSmsApp(context)
                 Card(
                     shape = RoundedCornerShape(8.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
+                        containerColor = if (isDefaultApp) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.35f) else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)
                     ),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Row(
-                        modifier = Modifier.padding(10.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Info,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
+                    Column(modifier = Modifier.padding(10.dp)) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = if (isDefaultApp) Icons.Default.CheckCircle else Icons.Default.Info,
+                                contentDescription = null,
+                                tint = if (isDefaultApp) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = if (isDefaultApp) "Default SMS App: Active" else "Default SMS App: Not Set",
+                                style = MaterialTheme.typography.labelMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = if (isDefaultApp) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "When you send a message, the app directs the carrier dispatch to your chosen SIM slot and subscription.",
+                            text = if (isDefaultApp)
+                                "SMS Query directs dispatches to your chosen SIM slot and writes messages to the system inbox."
+                            else
+                                "Set SMS Query as your default messaging app in Android Settings to manage system SMS across both SIMs.",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             fontSize = 11.sp,
@@ -246,23 +256,13 @@ fun DualSimDetailsDialog(
         dismissButton = {
             OutlinedButton(
                 onClick = {
-                    try {
-                        val intent = Intent(Settings.ACTION_WIRELESS_SETTINGS)
-                        context.startActivity(intent)
-                    } catch (e: Exception) {
-                        try {
-                            val intent = Intent(Settings.ACTION_SETTINGS)
-                            context.startActivity(intent)
-                        } catch (e2: Exception) {
-                            // ignore
-                        }
-                    }
+                    com.example.util.DefaultSmsAppUtil.openDefaultAppsSettings(context)
                 },
                 shape = RoundedCornerShape(8.dp)
             ) {
                 Icon(Icons.Default.OpenInNew, contentDescription = null, modifier = Modifier.size(14.dp))
                 Spacer(modifier = Modifier.width(4.dp))
-                Text("System Settings", fontSize = 12.sp)
+                Text("Android Settings", fontSize = 12.sp)
             }
         }
     )

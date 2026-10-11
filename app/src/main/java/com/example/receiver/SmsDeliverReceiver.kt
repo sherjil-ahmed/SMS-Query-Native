@@ -61,6 +61,22 @@ class SmsDeliverReceiver : BroadcastReceiver() {
             )
             dao.insertMessage(entity)
             Log.d("SmsDeliverReceiver", "Received and stored SMS from $sender on SIM $simSlot: $fullBody")
+
+            // As Default SMS App, write to system Telephony content provider
+            try {
+                val values = android.content.ContentValues().apply {
+                    put(Telephony.Sms.Inbox.ADDRESS, sender)
+                    put(Telephony.Sms.Inbox.BODY, fullBody)
+                    put(Telephony.Sms.Inbox.DATE, timestamp)
+                    put(Telephony.Sms.Inbox.READ, 0)
+                    if (subId > 0) {
+                        put(Telephony.Sms.Inbox.SUBSCRIPTION_ID, subId)
+                    }
+                }
+                context.contentResolver.insert(Telephony.Sms.Inbox.CONTENT_URI, values)
+            } catch (e: Exception) {
+                Log.w("SmsDeliverReceiver", "Could not write to system SMS provider: ${e.message}")
+            }
         }
     }
 

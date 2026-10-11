@@ -11,11 +11,46 @@ import androidx.activity.result.ActivityResultLauncher
 object DefaultSmsAppUtil {
 
     fun isDefaultSmsApp(context: Context): Boolean {
+        try {
+            val defaultPkg = Telephony.Sms.getDefaultSmsPackage(context)
+            if (defaultPkg == context.packageName) return true
+        } catch (e: Exception) {
+            // ignore
+        }
+
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            val roleManager = context.getSystemService(RoleManager::class.java)
-            roleManager?.isRoleHeld(RoleManager.ROLE_SMS) == true
+            try {
+                val roleManager = context.getSystemService(RoleManager::class.java)
+                roleManager?.isRoleHeld(RoleManager.ROLE_SMS) == true
+            } catch (e: Exception) {
+                false
+            }
         } else {
-            Telephony.Sms.getDefaultSmsPackage(context) == context.packageName
+            false
+        }
+    }
+
+    fun openDefaultAppsSettings(context: Context) {
+        try {
+            val intent = Intent(android.provider.Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            try {
+                val appSettings = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                    data = android.net.Uri.fromParts("package", context.packageName, null)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                context.startActivity(appSettings)
+            } catch (e2: Exception) {
+                try {
+                    val fallback = Intent(android.provider.Settings.ACTION_SETTINGS)
+                    fallback.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    context.startActivity(fallback)
+                } catch (e3: Exception) {
+                    // ignore
+                }
+            }
         }
     }
 

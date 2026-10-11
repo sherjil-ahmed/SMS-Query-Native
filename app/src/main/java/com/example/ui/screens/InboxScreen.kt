@@ -1,5 +1,6 @@
 package com.example.ui.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -46,6 +47,7 @@ import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -59,6 +61,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
@@ -210,6 +213,21 @@ fun InboxScreen(
                                 },
                                 leadingIcon = {
                                     Icon(Icons.Default.Add, contentDescription = null)
+                                }
+                            )
+                            val isDefaultApp by viewModel.isDefaultSmsApp.collectAsState()
+                            DropdownMenuItem(
+                                text = { Text(if (isDefaultApp) "Default SMS App (Active)" else "Set as Default SMS App") },
+                                onClick = {
+                                    showMenu = false
+                                    viewModel.setDefaultSmsDialogOpen(true)
+                                },
+                                leadingIcon = {
+                                    Icon(
+                                        imageVector = if (isDefaultApp) Icons.Default.CheckCircle else Icons.Default.MarkEmailRead,
+                                        contentDescription = null,
+                                        tint = if (isDefaultApp) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
+                                    )
                                 }
                             )
                             DropdownMenuItem(
@@ -544,6 +562,89 @@ fun InboxScreen(
                                 Icon(Icons.Default.MarkEmailRead, contentDescription = null, modifier = Modifier.size(14.dp))
                                 Spacer(modifier = Modifier.width(6.dp))
                                 Text("Grant SMS Permission", fontSize = 12.sp)
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Default SMS App Banner if app is not set as default in Android
+            val isDefaultAppBanner by viewModel.isDefaultSmsApp.collectAsState()
+            var showDefaultSmsBanner by remember { mutableStateOf(true) }
+
+            if (!isDefaultAppBanner && showDefaultSmsBanner) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 6.dp)
+                        .testTag("default_sms_banner"),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f)
+                    ),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.secondary.copy(alpha = 0.3f))
+                ) {
+                    Column(modifier = Modifier.padding(14.dp)) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.MarkEmailRead,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.secondary,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = "Default SMS App Not Set",
+                                style = MaterialTheme.typography.titleSmall,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onSecondaryContainer
+                            )
+                            Spacer(modifier = Modifier.weight(1f))
+                            IconButton(
+                                onClick = { showDefaultSmsBanner = false },
+                                modifier = Modifier.size(24.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Close,
+                                    contentDescription = "Dismiss banner",
+                                    modifier = Modifier.size(16.dp),
+                                    tint = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.6f)
+                                )
+                            }
+                        }
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "Set SMS Query as your default messaging app in Android to directly receive incoming SMS, write to system database, and manage dual SIM dispatches.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.85f),
+                            fontSize = 12.sp,
+                            lineHeight = 16.sp
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Button(
+                                onClick = { viewModel.requestSetAsDefaultSmsApp() },
+                                shape = RoundedCornerShape(8.dp),
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = MaterialTheme.colorScheme.secondary,
+                                    contentColor = MaterialTheme.colorScheme.onSecondary
+                                ),
+                                modifier = Modifier.testTag("banner_set_default_button")
+                            ) {
+                                Text("Set as Default SMS App", fontSize = 12.sp)
+                            }
+                            OutlinedButton(
+                                onClick = { viewModel.setDefaultSmsDialogOpen(true) },
+                                shape = RoundedCornerShape(8.dp),
+                                modifier = Modifier.testTag("banner_details_button")
+                            ) {
+                                Text("Details", fontSize = 12.sp)
                             }
                         }
                     }

@@ -153,4 +153,19 @@ class ExampleUnitTest {
         assertEquals("Work", customSim.shortLabel)
         assertEquals("SIM 2 • Work (T-Mobile)", customSim.fullLabel)
     }
+
+    @Test
+    fun testDefaultSmsModelAndPermissions() {
+        val sim1 = com.example.data.model.SimCard(
+            slotIndex = 1,
+            subscriptionId = 1,
+            displayName = "Personal",
+            carrierName = "Verizon",
+            isDefaultSms = true,
+            isSystemDetected = true
+        )
+        assertTrue(sim1.isDefaultSms)
+        assertEquals(1, sim1.slotIndex)
+        assertEquals("Personal", sim1.shortLabel)
+    }
 }

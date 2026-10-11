@@ -92,6 +92,9 @@ class SmsViewModel(application: Application) : AndroidViewModel(application) {
     private val _isDefaultSmsApp = MutableStateFlow(com.example.util.DefaultSmsAppUtil.isDefaultSmsApp(application))
     val isDefaultSmsApp: StateFlow<Boolean> = _isDefaultSmsApp.asStateFlow()
 
+    private val _isDefaultSmsDialogOpen = MutableStateFlow(false)
+    val isDefaultSmsDialogOpen: StateFlow<Boolean> = _isDefaultSmsDialogOpen.asStateFlow()
+
     private val _requestDefaultSmsAppTrigger = MutableStateFlow<Long?>(null)
     val requestDefaultSmsAppTrigger: StateFlow<Long?> = _requestDefaultSmsAppTrigger.asStateFlow()
 
@@ -359,6 +362,10 @@ class SmsViewModel(application: Application) : AndroidViewModel(application) {
         _isDefaultSmsApp.value = com.example.util.DefaultSmsAppUtil.isDefaultSmsApp(getApplication())
     }
 
+    fun setDefaultSmsDialogOpen(isOpen: Boolean) {
+        _isDefaultSmsDialogOpen.value = isOpen
+    }
+
     fun requestSetAsDefaultSmsApp() {
         _requestDefaultSmsAppTrigger.value = System.currentTimeMillis()
     }
@@ -367,6 +374,16 @@ class SmsViewModel(application: Application) : AndroidViewModel(application) {
         checkDefaultSmsAppStatus()
         if (_isDefaultSmsApp.value) {
             _snackbarMessage.value = "SMS Query is now your default SMS app!"
+        } else {
+            _snackbarMessage.value = "Default SMS app unchanged"
+        }
+    }
+
+    fun handleExternalSendIntent(address: String?, text: String?) {
+        if (!address.isNullOrBlank()) {
+            selectConversation(address)
+        } else {
+            setComposeDialogOpen(true)
         }
     }
 }
