@@ -88,6 +88,13 @@ class SmsViewModel(application: Application) : AndroidViewModel(application) {
     private val _permissionRequestTrigger = MutableStateFlow<Long?>(null)
     val permissionRequestTrigger: StateFlow<Long?> = _permissionRequestTrigger.asStateFlow()
 
+    // Default SMS App Role State
+    private val _isDefaultSmsApp = MutableStateFlow(com.example.util.DefaultSmsAppUtil.isDefaultSmsApp(application))
+    val isDefaultSmsApp: StateFlow<Boolean> = _isDefaultSmsApp.asStateFlow()
+
+    private val _requestDefaultSmsAppTrigger = MutableStateFlow<Long?>(null)
+    val requestDefaultSmsAppTrigger: StateFlow<Long?> = _requestDefaultSmsAppTrigger.asStateFlow()
+
     // Dual SIM management
     private val _availableSimCards = MutableStateFlow<List<SimCard>>(SimCard.getAvailableSims(application))
     val availableSimCards: StateFlow<List<SimCard>> = _availableSimCards.asStateFlow()
@@ -106,6 +113,7 @@ class SmsViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             repository.ensureInitialized()
             checkPermissionStatus()
+            checkDefaultSmsAppStatus()
             refreshSimCards()
         }
     }
@@ -345,5 +353,20 @@ class SmsViewModel(application: Application) : AndroidViewModel(application) {
 
     fun dismissPermissionRationale() {
         _showPermissionRationaleDialog.value = false
+    }
+
+    fun checkDefaultSmsAppStatus() {
+        _isDefaultSmsApp.value = com.example.util.DefaultSmsAppUtil.isDefaultSmsApp(getApplication())
+    }
+
+    fun requestSetAsDefaultSmsApp() {
+        _requestDefaultSmsAppTrigger.value = System.currentTimeMillis()
+    }
+
+    fun onDefaultSmsRoleResult() {
+        checkDefaultSmsAppStatus()
+        if (_isDefaultSmsApp.value) {
+            _snackbarMessage.value = "SMS Query is now your default SMS app!"
+        }
     }
 }
