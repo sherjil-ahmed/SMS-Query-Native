@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMS Query — Native Android SMS App with Multi-Attribute Search & Dual SIM</title>
+  <meta name="description" content="A minimalist native Android SMS client engineered for speed. Search through thousands of messages by sender, keyword, date range, and hourly time-of-day windows with intelligent dual-SIM hardware detection.">
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Light Effect -->
+  <div class="ambient-glow"></div>
+
+  <!-- Header Navigation -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#hero" class="brand-logo">
+        <img src="assets/logo.jpg" alt="SMS Query Logo" class="brand-icon">
+        <span class="brand-name">SMS <span>Query</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#gallery">Showcase</a></li>
+          <li><a href="#demo">Interactive Demo</a></li>
+          <li><a href="#why-us">Architecture</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Social Icons (Fake links with interactive toast feedback) -->
+        <div class="social-nav">
+          <a href="#social-x" class="social-icon-btn" data-platform="X (Twitter)" title="Follow on X" aria-label="Twitter X">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <a href="#social-linkedin" class="social-icon-btn" data-platform="LinkedIn" title="Connect on LinkedIn" aria-label="LinkedIn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+          </a>
+          <a href="#social-instagram" class="social-icon-btn" data-platform="Instagram" title="Follow on Instagram" aria-label="Instagram">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+          <a href="#social-facebook" class="social-icon-btn" data-platform="Facebook" title="Follow on Facebook" aria-label="Facebook">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+            </svg>
+          </a>
+        </div>
+
+        <a href="https://ais-pre-yspkmlmvitiqsax53m5xzk-284977860527.europe-west2.run.app" class="btn-primary" target="_blank" rel="noopener">
+          Get App
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner: Download Left, Animated Screen Recording Right -->
+  <section id="hero" class="hero-section">
+    <div class="container hero-grid">
+      
+      <!-- Left Column: Content & Primary Download -->
+      <div class="hero-content">
+        <div class="badge-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          Android Default SMS App Ready
+        </div>
+
+        <h1 class="hero-title">
+          Find Any Text in Seconds. <br>
+          <span class="gradient-text">True Dual-SIM Mastery.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          SMS Query is a lightning-fast, minimalist Android SMS client. Search your entire inbox using granular multi-attribute filters—keywords, sender contacts, custom date intervals, and specific time-of-day windows—with native dual-SIM hardware carrier switching.
+        </p>
+
+        <!-- Download Buttons -->
+        <div class="hero-cta-group">
+          <!-- Main Google Play / Android PWA Download link -->
+          <a href="https://ais-pre-yspkmlmvitiqsax53m5xzk-284977860527.europe-west2.run.app" class="download-highlight-btn" target="_blank" rel="noopener">
+            <!-- Google Play Icon -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <path d="M3.609 1.814L13.792 12 3.61 22.186A1.898 1.898 0 0 1 3 20.842V3.158c0-.505.222-.98.609-1.344z" fill="#00C1FF"/>
+              <path d="M17.186 8.607L13.792 12l3.394 3.393 3.826-2.187a1.433 1.433 0 0 0 0-2.412l-3.826-2.187z" fill="#FFC800"/>
+              <path d="M3.609 1.814l10.183 10.186 3.394-3.393L5.438.835a1.868 1.868 0 0 0-1.829.979z" fill="#00E676"/>
+              <path d="M17.186 15.393l-3.394-3.393-10.183 10.186c.55.602 1.398.71 2.052.338l11.525-7.131z" fill="#FF3A44"/>
+            </svg>
+            <div class="download-btn-text">
+              <small>Available Now</small>
+              <strong>Download for Android</strong>
+            </div>
+          </a>
+
+          <a href="#demo" class="btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            Try Live Filter Demo
+          </a>
+        </div>
+
+        <div class="hero-trust-list">
+          <div class="trust-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+            <span>100% On-Device Privacy</span>
+          </div>
+          <div class="trust-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+            <span>Sub-Millisecond SQLite</span>
+          </div>
+          <div class="trust-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+            <span>Zero Ads & Bloat</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Animated Smartphone Screen Recording Video Simulation -->
+      <div class="hero-visual">
+        <div class="phone-mockup-wrapper">
+          
+          <!-- Top Notch / Speaker -->
+          <div class="phone-notch">
+            <div class="camera-dot"></div>
+          </div>
+
+          <!-- Screen Container -->
+          <div class="phone-screen">
+            
+            <!-- Live Recording Indicator -->
+            <div class="rec-indicator">
+              <div class="rec-dot"></div>
+              <span>REC <span id="recTimer">00:00</span></span>
+            </div>
+
+            <!-- Status Bar -->
+            <div class="phone-status-bar">
+              <span>10:09</span>
+              <div class="status-bar-icons">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19H19.65l-.62-1.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+                <span>88%</span>
+              </div>
+            </div>
+
+            <!-- Simulated App Bar -->
+            <div class="sim-app-header">
+              <div class="sim-title-group">
+                <span class="sim-title">SMS Query</span>
+                <span class="sim-sim-badge">SIM 1 + 2</span>
+              </div>
+              <div class="sim-search-btn" id="simSearchBtn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Viewport for Animated Sequence -->
+            <div class="sim-viewport">
+              
+              <!-- Touch Ripple Effect -->
+              <div class="sim-touch-ripple" id="simTouchRipple"></div>
+
+              <!-- Stage 1: Inbox List -->
+              <div class="sim-stage-inbox" id="simStageInbox">
+                <div class="sim-msg-card">
+                  <div class="sim-avatar a1">A</div>
+                  <div class="sim-msg-info">
+                    <div class="sim-msg-top">
+                      <span class="sim-sender">Amazon Orders</span>
+                      <span class="sim-time">10:04 AM</span>
+                    </div>
+                    <div class="sim-msg-snippet">Your OTP 2-factor code is 492104.</div>
+                  </div>
+                </div>
+
+                <div class="sim-msg-card">
+                  <div class="sim-avatar a2">B</div>
+                  <div class="sim-msg-info">
+                    <div class="sim-msg-top">
+                      <span class="sim-sender">Bank Security</span>
+                      <span class="sim-time">09:15 AM</span>
+                    </div>
+                    <div class="sim-msg-snippet">OTP 2-factor authorization approved for $120.</div>
+                  </div>
+                </div>
+
+                <div class="sim-msg-card">
+                  <div class="sim-avatar a3">C</div>
+                  <div class="sim-msg-info">
+                    <div class="sim-msg-top">
+                      <span class="sim-sender">Charlie Davis</span>
+                      <span class="sim-time">Yesterday</span>
+                    </div>
+                    <div class="sim-msg-snippet">Hey! Are we still syncing up for coffee?</div>
+                  </div>
+                </div>
+
+                <div class="sim-msg-card">
+                  <div class="sim-avatar a1">G</div>
+                  <div class="sim-msg-info">
+                    <div class="sim-msg-top">
+                      <span class="sim-sender">Google Verify</span>
+                      <span class="sim-time">Oct 08</span>
+                    </div>
+                    <div class="sim-msg-snippet">G-782190 is your verification token.</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stage 2: Query Filter Form -->
+              <div class="sim-stage-query" id="simStageQuery">
+                <div style="font-size:0.8rem; font-weight:700; color:#fff;">Advanced Filter</div>
+                
+                <div class="sim-filter-box">
+                  <div class="sim-filter-label">Keywords</div>
+                  <div class="sim-filter-value">
+                    <span id="simFilterInputVal"></span>
+                    <span class="sim-cursor"></span>
+                  </div>
+                </div>
+
+                <div class="sim-filter-box">
+                  <div class="sim-filter-label">SIM Selection</div>
+                  <div class="sim-sim-switch">
+                    <div class="sim-pill" id="simPill1">SIM 1 (Personal)</div>
+                    <div class="sim-pill" id="simPill2">SIM 2 (Work)</div>
+                  </div>
+                </div>
+
+                <div class="sim-filter-box">
+                  <div class="sim-filter-label">Time Window</div>
+                  <div style="font-size:0.7rem; color:#cbd5e1;">09:00 AM — 06:00 PM</div>
+                </div>
+
+                <div class="sim-search-action-btn" id="simExecuteBtn">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                  Execute Query
+                </div>
+              </div>
+
+              <!-- Stage 3: Query Results List -->
+              <div class="sim-stage-results" id="simStageResults">
+                <div class="sim-result-header">
+                  <span>Found 2 Matches</span>
+                  <span>SIM 2 Only</span>
+                </div>
+
+                <div class="sim-result-card">
+                  <div class="sim-res-top">
+                    <span>Amazon Orders</span>
+                    <span style="font-size:0.65rem; color:#94a3b8;">10:04 AM</span>
+                  </div>
+                  <div style="font-size:0.68rem; color:#cbd5e1; margin-top:3px;">
+                    Your <span class="sim-highlight">OTP 2-factor</span> code is 492104. Valid for 10 min.
+                  </div>
+                </div>
+
+                <div class="sim-result-card">
+                  <div class="sim-res-top">
+                    <span>Bank Security</span>
+                    <span style="font-size:0.65rem; color:#94a3b8;">09:15 AM</span>
+                  </div>
+                  <div style="font-size:0.68rem; color:#cbd5e1; margin-top:3px;">
+                    <span class="sim-highlight">OTP 2-factor</span> authorization approved for $120.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Bottom Home Indicator -->
+            <div class="phone-nav-bar">
+              <div class="phone-home-indicator"></div>
+            </div>
+
+          </div>
+
+          <!-- Video Playback Controls Widget below bezel -->
+          <div class="phone-controls">
+            <button class="phone-ctrl-btn" id="togglePlayBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="4" width="4" height="16"/>
+                <rect x="14" y="4" width="4" height="16"/>
+              </svg>
+              Pause
+            </button>
+            <span style="font-size:0.75rem; color:#64748b;">• Simulated Device Screen</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Scrollable Product Showcase Section -->
+  <section id="gallery" class="section-spacer">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Interactive Gallery</div>
+        <h2 class="section-title">Designed for Focus. Engineered for Speed.</h2>
+        <p class="section-description">
+          Swipe through authentic product screenshots highlighting the refined, clutter-free Material Design 3 interface of SMS Query.
+        </p>
+      </div>
+
+      <!-- Horizontal Scrollable Carousel -->
+      <div class="carousel-wrapper">
+        <div class="carousel-scroll" id="screenshotCarousel">
+          
+          <!-- Card 1: Multi-Attribute Query Screen -->
+          <div class="carousel-card">
+            <div class="card-image-box">
+              <img src="assets/filter_screen.jpg" alt="Advanced Multi-Attribute Query Screen" loading="lazy">
+            </div>
+            <span class="card-badge">Advanced Search</span>
+            <h3 class="card-title">Precision Query Engine</h3>
+            <p class="card-desc">
+              Filter incoming messages by keyword, specific sender contact, calendar date brackets, and hour-by-hour windows simultaneously.
+            </p>
+          </div>
+
+          <!-- Card 2: Dual SIM Hardware Manager -->
+          <div class="carousel-card">
+            <div class="card-image-box">
+              <img src="assets/dualsim_screen.jpg" alt="Dual SIM Hardware Manager" loading="lazy">
+            </div>
+            <span class="card-badge">Dual-SIM Telephony</span>
+            <h3 class="card-title">Hardware-Aware SIM Routing</h3>
+            <p class="card-desc">
+              Inspect active SIM slots, carrier network identifiers, and signal metrics. Switch between Personal and Business SIM cards on the fly.
+            </p>
+          </div>
+
+          <!-- Card 3: Minimalist Inbox -->
+          <div class="carousel-card">
+            <div class="card-image-box">
+              <img src="assets/inbox_screen.jpg" alt="Clean Minimalist Inbox Screen" loading="lazy">
+            </div>
+            <span class="card-badge">Native Inbox</span>
+            <h3 class="card-title">Zero Bloat Inbox</h3>
+            <p class="card-desc">
+              A distraction-free timeline of your messages. Each thread features distinct SIM color indicators so you always know which line received what.
+            </p>
+          </div>
+
+          <!-- Card 4: Conversation View -->
+          <div class="carousel-card">
+            <div class="card-image-box">
+              <img src="assets/chat_screen.jpg" alt="Clean SMS Thread View" loading="lazy">
+            </div>
+            <span class="card-badge">Thread View</span>
+            <h3 class="card-title">Fluid Chat & Instant Send</h3>
+            <p class="card-desc">
+              Seamlessly read long threads, inspect delivery timestamps, and choose which carrier SIM to reply with in a single tap.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Carousel Left/Right Buttons -->
+        <div class="carousel-controls">
+          <button class="carousel-arrow" id="carouselPrev" aria-label="Previous image">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <button class="carousel-arrow" id="carouselNext" aria-label="Next image">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Deep-Dive Features Section (Spacious, Alternating Blocks) -->
+  <section id="features" class="section-spacer" style="background-color: var(--bg-secondary);">
+    <div class="container">
+      
+      <div class="section-header">
+        <div class="section-tag">Core Features</div>
+        <h2 class="section-title">Why SMS Query Outperforms Standard SMS Apps</h2>
+        <p class="section-description">
+          Built specifically for power users who receive hundreds of verification codes, bank receipts, and client messages across two separate SIM lines.
+        </p>
+      </div>
+
+      <div class="feature-deep-dive">
+        
+        <!-- Feature Row 1 -->
+        <div class="feature-row">
+          <div class="feature-detail-text">
+            <span class="feature-pillar-pill">Feature 01 // Multi-Attribute Filtering</span>
+            <h3 class="feature-detail-title">Never scroll endlessly through weeks of messages again.</h3>
+            <p class="feature-detail-desc">
+              Most default messaging apps offer only simple text searches that match partial words across years of history. SMS Query lets you narrow down results instantly with four simultaneous parameters.
+            </p>
+            <ul class="feature-check-list">
+              <li>
+                <div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <span><strong>Targeted Senders:</strong> Isolate messages from Amazon, your bank, or specific contacts.</span>
+              </li>
+              <li>
+                <div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <span><strong>Date Intervals:</strong> Restrict queries between any two calendar days.</span>
+              </li>
+              <li>
+                <div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <span><strong>Time-of-Day Windows:</strong> Find codes received only during office hours (e.g. 09:00 to 17:00).</span>
+              </li>
+            </ul>
+          </div>
+          <div class="feature-detail-visual">
+            <div class="feature-image-frame">
+              <img src="assets/filter_screen.jpg" alt="Filter Screen Screenshot" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature Row 2 (Reversed) -->
+        <div class="feature-row reverse">
+          <div class="feature-detail-text">
+            <span class="feature-pillar-pill">Feature 02 // True Dual-SIM Hardware</span>
+            <h3 class="feature-detail-title">Two SIM cards. One seamless, unified workflow.</h3>
+            <p class="feature-detail-desc">
+              Standard SMS applications often default to SIM-1 without checking your active hardware configurations. SMS Query actively reads Android's `SubscriptionManager` API to present real carrier names, signal indicators, and distinct slot tags.
+            </p>
+            <ul class="feature-check-list">
+              <li>
+                <div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <span><strong>Independent Line Selection:</strong> Pick SIM 1 or SIM 2 for both sending and filtering.</span>
+              </li>
+              <li>
+                <div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <span><strong>Hardware Carrier Visibility:</strong> View active subscriptions (e.g., T-Mobile 5G vs Vodafone LTE).</span>
+              </li>
+              <li>
+                <div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <span><strong>Color-Coded Message Pills:</strong> Instantly distinguish personal and work messages.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="feature-detail-visual">
+            <div class="feature-image-frame">
+              <img src="assets/dualsim_screen.jpg" alt="Dual SIM Screenshot" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature Row 3 -->
+        <div class="feature-row">
+          <div class="feature-detail-text">
+            <span class="feature-pillar-pill">Feature 03 // Default SMS Handler</span>
+            <h3 class="feature-detail-title">Full system integration. Zero compromises.</h3>
+            <p class="feature-detail-desc">
+              SMS Query includes all necessary Android `ROLE_SMS` receivers, headless services, and MMS adapters required to operate as your system-wide default messaging app on Android 7.0 through Android 16.
+            </p>
+            <ul class="feature-check-list">
+              <li>
+                <div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <span><strong>System Inbox Sync:</strong> Writes directly to Android `Telephony.Sms.Inbox` for 100% interoperability.</span>
+              </li>
+              <li>
+                <div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <span><strong>On-Device Room DB:</strong> High-performance local index ensures search takes under 5 milliseconds.</span>
+              </li>
+              <li>
+                <div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <span><strong>Zero Cloud Telemetry:</strong> Your messages never touch an external cloud server.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="feature-detail-visual">
+            <div class="feature-image-frame">
+              <img src="assets/inbox_screen.jpg" alt="Inbox Screenshot" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Sandbox Live Query Simulator -->
+  <section id="demo" class="sandbox-section">
+    <div class="container">
+      
+      <div class="section-header" style="margin-bottom: 40px;">
+        <div class="section-tag">Interactive Sandbox</div>
+        <h2 class="section-title">Test the Query Engine in Real-Time</h2>
+        <p class="section-description">
+          Experience how SMS Query instantly finds what you need. Type a keyword like <em>"OTP"</em>, <em>"Bank"</em>, or <em>"Flight"</em> below, switch SIM slots, and see immediate results.
+        </p>
+      </div>
+
+      <div class="sandbox-container">
+        <div class="sandbox-header">
+          <h3 class="sandbox-title">Simulated Message Index</h3>
+          <p class="sandbox-desc">Simulating 10,000+ local messages stored inside Android Room database.</p>
+        </div>
+
+        <div class="sandbox-inputs-grid">
+          <div class="input-group">
+            <label for="sandboxKeyword">Keywords</label>
+            <input type="text" id="sandboxKeyword" class="sandbox-input" placeholder="Type: OTP, receipt, flight, invoice..." value="OTP">
+          </div>
+
+          <div class="input-group">
+            <label for="sandboxSim">SIM Slot</label>
+            <select id="sandboxSim" class="sandbox-select">
+              <option value="ALL">All SIM Slots</option>
+              <option value="SIM 1">SIM 1 (Personal)</option>
+              <option value="SIM 2">SIM 2 (Work)</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="sandboxSender">Sender Filter</label>
+            <select id="sandboxSender" class="sandbox-select">
+              <option value="ALL">All Senders</option>
+              <option value="Amazon">Amazon</option>
+              <option value="Chase Bank">Chase Bank</option>
+              <option value="Google">Google</option>
+              <option value="Delta Airlines">Delta Airlines</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Filtered Results Container -->
+        <div class="sandbox-results-box">
+          <div class="results-count-label" id="sandboxCount">Found 2 matching messages</div>
+          <div class="results-list" id="sandboxResults">
+            <!-- Populated dynamically by app.js -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Call to Action Banner -->
+  <section class="cta-banner-section">
+    <div class="container">
+      <div class="cta-banner-card">
+        <h2 class="cta-banner-title">Upgrade Your SMS Experience Today.</h2>
+        <p class="cta-banner-desc">
+          Free, fast, and completely private. Available directly as an Android app ready for instant install and testing.
+        </p>
+        <div class="cta-btn-wrap">
+          <a href="https://ais-pre-yspkmlmvitiqsax53m5xzk-284977860527.europe-west2.run.app" class="download-highlight-btn" target="_blank" rel="noopener">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+              <path d="M3.609 1.814L13.792 12 3.61 22.186A1.898 1.898 0 0 1 3 20.842V3.158c0-.505.222-.98.609-1.344z" fill="#00C1FF"/>
+              <path d="M17.186 8.607L13.792 12l3.394 3.393 3.826-2.187a1.433 1.433 0 0 0 0-2.412l-3.826-2.187z" fill="#FFC800"/>
+              <path d="M3.609 1.814l10.183 10.186 3.394-3.393L5.438.835a1.868 1.868 0 0 0-1.829.979z" fill="#00E676"/>
+              <path d="M17.186 15.393l-3.394-3.393-10.183 10.186c.55.602 1.398.71 2.052.338l11.525-7.131z" fill="#FF3A44"/>
+            </svg>
+            <div class="download-btn-text">
+              <small>Get the App</small>
+              <strong>Launch Android App (PWA)</strong>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        
+        <div class="footer-brand">
+          <a href="#hero" class="brand-logo">
+            <img src="assets/logo.jpg" alt="SMS Query" class="brand-icon">
+            <span class="brand-name">SMS <span>Query</span></span>
+          </a>
+          <p class="footer-brand-desc">
+            The minimalist Android SMS app engineered for power users, dual-SIM flexibility, and granular message filtering.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-social-title">Follow & Connect</div>
+          <div class="footer-social-row">
+            <a href="#social-facebook" class="social-icon-btn" data-platform="Facebook" title="Facebook" aria-label="Facebook">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+              </svg>
+            </a>
+            <a href="#social-instagram" class="social-icon-btn" data-platform="Instagram" title="Instagram" aria-label="Instagram">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+            <a href="#social-linkedin" class="social-icon-btn" data-platform="LinkedIn" title="LinkedIn" aria-label="LinkedIn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+            <a href="#social-x" class="social-icon-btn" data-platform="X (Twitter)" title="X (Twitter)" aria-label="X (Twitter)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 SMS Query Project. All rights reserved.</div>
+        <div class="footer-links">
+          <a href="#privacy" onclick="alert('Privacy Policy: All SMS data is stored strictly on your local device. SMS Query collects zero personal telemetry and operates without cloud dependencies.'); return false;">Privacy Policy</a>
+          <a href="#terms" onclick="alert('Terms: Open source native utility designed for Android 7.0 (API 24) to Android 16 (API 36).'); return false;">Terms of Use</a>
+          <a href="#github" onclick="alert('Developer repository and documentation available in the app source code.'); return false;">Documentation</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

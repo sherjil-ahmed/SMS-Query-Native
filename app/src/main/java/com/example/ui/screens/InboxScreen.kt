@@ -36,6 +36,7 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.FilterList
+import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.MarkEmailRead
 import androidx.compose.material.icons.filled.MoreVert
@@ -104,6 +105,7 @@ fun InboxScreen(
     val filter by viewModel.queryFilter.collectAsState()
     val themeMode by viewModel.themeMode.collectAsState()
     val isPermissionGranted by viewModel.isSmsPermissionGranted.collectAsState()
+    val context = androidx.compose.ui.platform.LocalContext.current
 
     var showMenu by remember { mutableStateOf(false) }
     var quickSearchText by remember { mutableStateOf("") }
@@ -258,6 +260,22 @@ fun InboxScreen(
                                 },
                                 leadingIcon = {
                                     Icon(Icons.Default.Refresh, contentDescription = null)
+                                }
+                            )
+                            DropdownMenuItem(
+                                text = { Text("App Website & Showcase") },
+                                onClick = {
+                                    showMenu = false
+                                    try {
+                                        val intent = android.content.Intent(
+                                            android.content.Intent.ACTION_VIEW,
+                                            android.net.Uri.parse("https://ais-pre-yspkmlmvitiqsax53m5xzk-284977860527.europe-west2.run.app")
+                                        )
+                                        context.startActivity(intent)
+                                    } catch (_: Exception) {}
+                                },
+                                leadingIcon = {
+                                    Icon(Icons.Default.Language, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                                 }
                             )
                         }
